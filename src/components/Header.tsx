@@ -20,8 +20,17 @@ const Header = () => {
     if (href === "#home") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      const element = document.querySelector(href);
-      element?.scrollIntoView({ behavior: "smooth" });
+      const element = document.querySelector(href) as HTMLElement;
+      if (element) {
+        const headerOffset = 80; // Account for fixed header height
+        const elementPosition = element.offsetTop;
+        const offsetPosition = elementPosition - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
     }
   };
 
